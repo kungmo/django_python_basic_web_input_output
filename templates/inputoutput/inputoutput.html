@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>inputoutput test html</title>
+    <!-- 저쪽 아래에 있는 form 속의 <button type="button" onclick="send();">의 send() 함수에 관한 내용이다.
+    테스트를 위하여 send 됐다는 알림창을 띄우고(이건 함수 작동 확인용으로 넣었을 뿐이라 지워도 됨)
+    form id="contents" 이므로 contents 이름의 폼 속에 있는 content1과 content2를 보낸 다음 폼 내용을 초기화한다. -->
+    <script> function send() {
+        alert("send");
+        document.getElementById("contents").submit();
+        document.getElementById("contents").reset();
+    }
+    </script>
+</head>
+
+<body>
+    <p>입출력 테스트</p>
+    <form id="contents" name="contents" method="post" action="{% url 'result' %}">
+        <!-- 아래에 있는 content1, content2를 입력받아서 javascript 함수 "send();"를 실행시켜 POST 방법으로 result.html에 전송
+        숫자를 입력 받으려면 type="number"> 로 설정한다.
+        -->
+        {% csrf_token %}
+        content1: <input name="content1" type="text">
+        content2: <input name="content2" type="text">
+        <button type="button" onclick="send();">전송</button>
+    </form>
+</body>
+</html>
